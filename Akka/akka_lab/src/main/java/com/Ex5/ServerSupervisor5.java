@@ -36,6 +36,6 @@ public class ServerSupervisor5 extends AbstractActor {
     }
 
     static Props props() {
-        return Props.create(CounterSupervisorActor.class);
+        return Props.create(ServerSupervisor5.class);
     }
 }
