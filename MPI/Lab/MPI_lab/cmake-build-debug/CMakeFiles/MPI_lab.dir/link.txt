@@ -1,0 +1,1 @@
+/usr/bin/cc -g  -pthread CMakeFiles/MPI_lab.dir/guess.c.o CMakeFiles/MPI_lab.dir/monte_carlo.c.o  -o Exec/MPI_lab  -Wl,-rpath,/usr/lib/x86_64-linux-gnu/openmpi/lib /usr/lib/x86_64-linux-gnu/openmpi/lib/libmpi.so 

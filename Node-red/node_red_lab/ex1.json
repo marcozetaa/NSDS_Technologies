@@ -1,0 +1,100 @@
+[
+    {
+        "id": "e06805297e78950e",
+        "type": "tab",
+        "label": "Exercise 1",
+        "disabled": true,
+        "info": ""
+    },
+    {
+        "id": "20f9b5c22a82e2f1",
+        "type": "inject",
+        "z": "e06805297e78950e",
+        "name": "Hello World!",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            },
+            {
+                "p": "to",
+                "v": "marco.zanghieri@mail.polimi.it",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Test Node Red mail",
+        "payload": "Hello from Marco c:",
+        "payloadType": "str",
+        "x": 220,
+        "y": 300,
+        "wires": [
+            [
+                "f889cc8a670e909c"
+            ]
+        ]
+    },
+    {
+        "id": "24380507a326038a",
+        "type": "debug",
+        "z": "e06805297e78950e",
+        "name": "Print Msg!",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "f889cc8a670e909c",
+        "type": "delay",
+        "z": "e06805297e78950e",
+        "name": "Limit 1msg/5min",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "days",
+        "rate": "1",
+        "nbRateUnits": "5",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 480,
+        "y": 300,
+        "wires": [
+            [
+                "24380507a326038a",
+                "d1709360c2819826"
+            ]
+        ]
+    },
+    {
+        "id": "d1709360c2819826",
+        "type": "e-mail",
+        "z": "e06805297e78950e",
+        "server": "smtps.aruba.it",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "Send Mail!",
+        "x": 770,
+        "y": 360,
+        "wires": []
+    }
+]

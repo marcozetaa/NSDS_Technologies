@@ -1,0 +1,120 @@
+[
+    {
+        "id": "bae74eb1cf275c3e",
+        "type": "tab",
+        "label": "Exercise 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "39ac80900d38a57f",
+        "type": "inject",
+        "z": "bae74eb1cf275c3e",
+        "name": "Get timestap",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            },
+            {
+                "p": "to",
+                "v": "marco.zanghieri@mail.polimi.it",
+                "vt": "str"
+            },
+            {
+                "p": "cc",
+                "v": "sumo2@hotmail.it",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Custom Topic of Node",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 220,
+        "wires": [
+            [
+                "ca66181564364ca8",
+                "c8a8198cdcd4fd95"
+            ]
+        ]
+    },
+    {
+        "id": "c06c92f057d96016",
+        "type": "debug",
+        "z": "bae74eb1cf275c3e",
+        "name": "Print Message!",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "a949fdae277f37ab",
+        "type": "e-mail",
+        "z": "bae74eb1cf275c3e",
+        "server": "smtps.aruba.it",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "Send Email!",
+        "x": 850,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "c8a8198cdcd4fd95",
+        "type": "function",
+        "z": "bae74eb1cf275c3e",
+        "name": "Swap CC & TO",
+        "func": "var queue_array = flow.get(\"queue\") \nif (!Array.isArray(queue_array)) {\n    //  If not, set up array.\n    node.warn(\"Initialising array\");\n    queue_array = [];\n       flow.set('queue', queue_array);\n    node.warn(\"Array set up.\");\n}\n\nqueue_array.push(msg.payload);\n\nlet newMsg = {\n    topic: msg.topic,\n    to: msg.cc,\n    cc: msg.to,\n    _msgid: msg._msgid\n}\n\nvar payload = queue_array.slice(-3);\n\nnewMsg.payload = payload;\n\nif (msg.timestamp % 2 == 0) return [null,newMsg];\nelse{\n    return [newMsg,null];\n}",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 220,
+        "wires": [
+            [
+                "c06c92f057d96016"
+            ],
+            [
+                "a949fdae277f37ab"
+            ]
+        ]
+    },
+    {
+        "id": "ca66181564364ca8",
+        "type": "debug",
+        "z": "bae74eb1cf275c3e",
+        "name": "Print Timestamp",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "timestamp",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 380,
+        "y": 100,
+        "wires": []
+    }
+]
